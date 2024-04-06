@@ -55,6 +55,7 @@ public class WebSecurity {
 		http.authorizeHttpRequests(auth -> {
 			auth.requestMatchers(/*HttpMethod.POST, "/users"*/ new AntPathRequestMatcher("/users", "POST")).permitAll();//.access(new WebExpressionAuthorizationManager("hasIpAddress('"+environment.getProperty("gateway.ip")+"')"));
 			auth.requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll();
+			auth.requestMatchers(new AntPathRequestMatcher("/users/status/check", "GET")).permitAll();
 		});
 		http.addFilter(authenticationFilter)
 		.authenticationManager(authenticationManager)
